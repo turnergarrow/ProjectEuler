@@ -1,6 +1,17 @@
 import numpy as np
 import math as m
 import copy as cp
+from datetime import datetime as dt
+import time
+from numba import jit
+
+def timer(f):
+    def wrapper():
+        start = time.time()
+        f()
+        end = time.time()
+        print(f"Took {end-start} s")
+    return wrapper
 
 # get the number of factors of a number
 def get_n_factors(num):
@@ -44,10 +55,15 @@ def get_primes(n):
         return primes
 
 # get all prime numbers up to n
+@jit
 def sieve(n):
-    prime = list(True for i in range(n))
+    n = int(n)
+    prime = [False, True]*(n//2)
+    prime[1], prime[2] = False, True
+    if n%2 == 1:
+        prime.append(True)
 
-    p = 2
+    p = 3
     while p*p <= n:
         if prime[p]:
             p_mult = 2*p
