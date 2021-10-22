@@ -4,6 +4,8 @@ import copy as cp
 from datetime import datetime as dt
 import time
 from numba import jit
+import random as rand
+from scipy import special
 
 def timer(f):
     def wrapper():
@@ -14,6 +16,7 @@ def timer(f):
     return wrapper
 
 # get the number of factors of a number
+@jit
 def get_n_factors(num):
     tot = 0
     i = 1
@@ -26,6 +29,7 @@ def get_n_factors(num):
     return tot
 
 # get the factors of a number
+@jit
 def get_factors(num):
     fac = []
     i = 1
@@ -36,14 +40,15 @@ def get_factors(num):
         i += 1
     if i*i == num:
         fac.append(i)
-    return tot
+    return fac
 
 # get prime factors of a number
+@jit
 def get_primes(n):
     primes = []
     r = 0
 
-    for i in range(2, ceil(sqrt(n))+1):
+    for i in range(2, m.ceil(m.sqrt(n))+1):
         if n%i == 0:
             primes.append(i)
             r = int(n/i)
@@ -79,8 +84,9 @@ def sieve(n):
     return ps
 
 # check if number is prime
+@jit
 def is_prime(n):
-    for i in range(2, ceil(sqrt(n))):
+    for i in range(2, m.ceil(m.sqrt(n))):
         if n%i == 0:
             return False
     return True
