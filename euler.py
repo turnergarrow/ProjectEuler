@@ -8,9 +8,9 @@ import random as rand
 from scipy import special
 
 def timer(f):
-    def wrapper():
+    def wrapper(*args):
         start = time.time()
-        f()
+        f(*args)
         end = time.time()
         print(f"Took {end-start} s")
     return wrapper
@@ -86,7 +86,22 @@ def sieve(n):
 # check if number is prime
 @jit
 def is_prime(n):
-    for i in range(2, m.ceil(m.sqrt(n))):
+    if n == 2:
+        return True
+    for i in range(2, m.ceil(m.sqrt(n))+1):
         if n%i == 0:
             return False
     return True
+
+# check if number is prime
+@jit
+def digit_sum(n):
+    if n < 0:
+        return -1
+    if n < 10:
+        return n
+    summ = 0
+    while n > 0:
+        n, m = divmod(n, 10)
+        summ += m
+    return summ
