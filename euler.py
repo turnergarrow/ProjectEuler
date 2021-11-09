@@ -6,6 +6,8 @@ import time
 from numba import jit
 import random as rand
 from scipy import special
+import cProfile
+import pstats
 
 def timer(f):
     def wrapper(*args):
