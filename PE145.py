@@ -8,18 +8,6 @@ def all_odd(n):
             return False
     return True
 
-@jit
-def reverse(n):
-    r = 0
-    d, m = divmod(n, 10)
-    if m == 0:
-        return -1
-    while n > 0:
-        r *= 10
-        n, m = divmod(n, 10)
-        r += m
-    return r
-
 @timer
 @jit
 def main():
