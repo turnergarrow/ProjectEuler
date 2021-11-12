@@ -119,3 +119,6 @@ def reverse(n):
         n, m = divmod(n, 10)
         r += m
     return r
+
+def is_palindrome(n):
+    return n == reverse(n)
