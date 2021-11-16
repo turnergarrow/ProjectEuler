@@ -122,3 +122,6 @@ def reverse(n):
 
 def is_palindrome(n):
     return n == reverse(n)
+
+def is_int(n):
+    return np.isclose(n, int(n))
